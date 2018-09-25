@@ -1,0 +1,64 @@
+body {
+  font: 10px sans-serif; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #d8d8d8;
+  shape-rendering: crispEdges; }
+
+#viz {
+  margin-left: 10vw;
+  margin-right: 10vw;
+  display: grid;
+  grid-template-columns: 50vw 30vw;
+  grid-template-rows: 80vh auto; }
+
+#slider {
+  grid-row: 2/3;
+  margin-top: 50px; }
+
+#chart {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  width: 100%;
+  max-height: calc(100% - 50px); }
+
+.d3-tip {
+  line-height: 1;
+  font: 14px sans-serif;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #b9b9b9;
+  border-radius: 2px; }
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center; }
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0; }
+
+#tickmarks {
+  display: inline;
+  font-size: 12px; }
+
+.tickmarks {
+  position: absolute;
+  float: right;
+  text-align: right;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0; }
+
+/*# sourceMappingURL=styles.css.map */
