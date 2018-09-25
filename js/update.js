@@ -6,9 +6,14 @@ var sliderYears = [
     {key: "2014", value:"40"}
 ];
 
-
-var margin = {top: 10, right: 10, bottom: 50, left: 50},
-    box = $('#chart')[0].getBoundingClientRect();
+var margin;
+if(window.innerWidth < 825){
+    margin = {top: 10, right: 10, bottom: 20, left: 20};
+}
+else {
+    margin = {top: 10, right: 10, bottom: 50, left: 50};
+}
+    var box = $('#chart')[0].getBoundingClientRect();
 // dim = Math.min(parseInt(d3.select("#scatter").style("width")), parseInt(d3.select("#scatter").style("height"))),
 // width = dim - margin.left - margin.right,
 // height = dim - margin.top - margin.bottom;

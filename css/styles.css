@@ -15,21 +15,37 @@ body {
   display: grid;
   grid-template-columns: 60vw 3vw 25vw;
   grid-template-rows: 80vh 10vh; }
+  @media (max-width: 820px) and (orientation: portrait) {
+    #viz {
+      grid-template-columns: 100vw;
+      grid-template-rows: 40vh 40vh 10vh; } }
 
 #sidebar {
   padding-top: 5px;
   grid-column: 3/4;
   grid-row: 1/2; }
+  @media (max-width: 820px) and (orientation: portrait) {
+    #sidebar {
+      grid-column: 1/2; } }
 
 #slider {
   grid-row: 2/3;
   margin-top: 50px; }
+  @media (max-width: 820px) and (orientation: portrait) {
+    #slider {
+      grid-row: 3/4; } }
+  @media (max-width: 820px) and (orientation: landscape) {
+    #slider {
+      margin-top: 10px; } }
 
 #chart {
   grid-column: 1/2;
   grid-row: 1/2;
   width: 100%;
   max-height: calc(100% - 50px); }
+  @media (max-width: 820px) and (orientation: portrait) {
+    #chart {
+      grid-row: 2/3; } }
 
 .d3-tip {
   line-height: 1;
@@ -80,6 +96,9 @@ path {
 
 #filter {
   margin-top: 50px; }
+  @media (max-width: 820px) and (orientation: landscape) {
+    #filter {
+      margin-top: 10px; } }
 
 #hint1 {
   font-size: 12px;
@@ -90,12 +109,21 @@ path {
   font-size: 65px;
   font-weight: 800;
   fill: #adadad; }
+  @media (max-width: 820px) {
+    #bigYearLabel {
+      font-size: 30px; } }
 
 input[type="radio"] {
   margin: 10px 3px 0 0; }
 
 #fucktrying {
-  width: 100%; }
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%; }
+  @media (max-width: 820px) and (orientation: portrait) {
+    #fucktrying {
+      display: grid;
+      grid-template-columns: 50% 50%; } }
 
 text.label {
   font-size: 12px; }
