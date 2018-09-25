@@ -1,5 +1,7 @@
 body {
-  font: 10px sans-serif; }
+  font: 10px sans-serif;
+  overflow-x: hidden;
+  font-family: 'Arimo', sans-serif; }
 
 .axis path,
 .axis line {
@@ -11,10 +13,11 @@ body {
   margin-left: 10vw;
   margin-right: 10vw;
   display: grid;
-  grid-template-columns: 50vw 10vw 20vw;
-  grid-template-rows: 80vh auto; }
+  grid-template-columns: 60vw 3vw 25vw;
+  grid-template-rows: 80vh 10vh; }
 
 #sidebar {
+  padding-top: 5px;
   grid-column: 3/4;
   grid-row: 1/2; }
 
@@ -71,10 +74,57 @@ path {
   fill: none; }
 
 .radioLabels {
-  text-transform: uppercase;
-  font-weight: 800; }
+  font-weight: 400;
+  font-size: 14px;
+  color: grey; }
 
 #filter {
-  margin-top: 100px; }
+  margin-top: 50px; }
+
+#hint1 {
+  font-size: 12px;
+  font-weight: 400;
+  fill: #4d4d4d; }
+
+#bigYearLabel {
+  font-size: 65px;
+  font-weight: 800;
+  fill: #adadad; }
+
+input[type="radio"] {
+  margin: 10px 3px 0 0; }
+
+#fucktrying {
+  width: 100%; }
+
+text.label {
+  font-size: 12px; }
+
+.rad {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  margin: 10px 3px 0 0; }
+
+.rad > input {
+  visibility: hidden;
+  position: absolute; }
+
+.rad > i {
+  /* DEFAULT <i> STYLE */
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: 0.2s;
+  box-shadow: inset 0 0 0 8px #fff;
+  border: 3px solid gray; }
+
+.rad > input:checked + i {
+  box-shadow: inset 0 0 0 3px #fff;
+  background: orange; }
 
 /*# sourceMappingURL=styles.css.map */

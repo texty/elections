@@ -56,10 +56,12 @@ alertValue = function() {
         return obj.value === sliderValue;
     });
     var year = filteredArray[0].key;
+    $('#bigYearLabel').html(year);
     var selectedRegion = document.querySelector('input[name="check"]:checked').value;
     drawChartYear(year, selectedRegion);
 };
 
+//малюємо дот-плот
 var color = d3.scale.category10();
 
 var x = d3.scale.linear()
@@ -155,6 +157,28 @@ retrieve_my_data(function(data){
 
         });
 
+        svg.append("text")
+            .attr("x", x(0.4))
+            .attr("y", y(0.45))
+            .attr("dy", 0)
+            .attr("id", "hint1")         
+            .html("клікайте на точки, аби подивитись, як голосував район протягом 2002-2014 рр.")
+            .call(wrap, 250);
+
+        svg.append("text")
+            .attr("x", x(0.7))
+            .attr("y", y(0.8))
+            .attr("dy", 0)
+            .attr("id", "bigYearLabel")
+            .html(function(){
+                var sliderValue = $("#mySlider").val();
+                var filteredArray = sliderYears.filter(function (obj) {
+                    return obj.value === sliderValue;
+                });
+                var year = filteredArray[0].key;
+                return year
+            });
+            
 
     //функція пошуку по точках
     $("#filter").keyup(function () {
@@ -175,9 +199,10 @@ retrieve_my_data(function(data){
     }).keyup();
 });
 
-
+//перемальовуємо дотт-плот на зміну року чи регіону
 function drawChartYear(year, region) {
     document.getElementById('filter').value = '';
+    $("#hint1").remove();
 
     x.range([0, width]);
     y.range([height, 0]);
@@ -219,6 +244,7 @@ function drawChartYear(year, region) {
         var dots = svg.selectAll(".dot")
             .data(subset);
 
+        //видаляємо непотрібні точки (коли обираємо регіон)
         dots.exit()
             .attr("class", "exit")
             .transition(t)
@@ -226,6 +252,7 @@ function drawChartYear(year, region) {
             .style("fill-opacity", 1e-6)
             .remove();
 
+        //змінюємо наявні
         dots.attr("class", "dot")
             .transition(t)
             .attr("cx", function (d) {
@@ -239,7 +266,7 @@ function drawChartYear(year, region) {
             })
             .style("opacity", "0.7");
 
-
+        //додаємо відсутні точки (коли після регіону обираємо усі і треба повернути видалені)
         dots.enter().append("circle")
             .attr("class", "dot")
             .attr("cx", function (d) {
@@ -290,6 +317,9 @@ function drawChartYear(year, region) {
         }).keyup();
 
     });
+
+    // $("g.y.axis > g.tick > text").attr("x", "-5");
+
 }
 
 
@@ -326,7 +356,12 @@ function resize() {
         .call(xAxis);
 
     svg.select('.x.axis').select('.label')
-        .attr("x",width);
+        .attr("x", width);
+
+    svg.select(".hint")
+        .attr("x", x(0.4))
+        .attr("y", y(0.43));
+
 
     svg.select('.y.axis')
         .call(yAxis);
@@ -360,6 +395,39 @@ d3.selectAll("input[name='check']").on("change", function(){
         return obj.value === sliderValue;
     });
     var year = filteredArray[0].key;
+
     var selectedRegion = document.querySelector('input[name="check"]:checked').value;
-    drawChartYear(year, selectedRegion)
+    drawChartYear(year, selectedRegion);
+
 });
+
+
+
+function wrap(text, width) {
+    text.each(function () {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.2, // ems
+            y = text.attr("y"),
+            x = text.attr("x"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan")
+                    .attr("x", x).attr("y", y)
+                    .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                    .text(word);
+            }
+        }
+    });
+}
+

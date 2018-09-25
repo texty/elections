@@ -8,7 +8,8 @@
     <title>Електоральні вподобання</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://rawgit.com/MasterMaps/d3-slider/master/d3.slider.css">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,400i,500,500i,700,700i,800,800i,900|Arimo:400,400i,700,700i|Cormorant+Garamond:400,500,500i,600,600i|Exo+2:400,400i,500,500i,600,700,800|M+PLUS+1p:300,400,500,700,800,900|Prosto+One|Rubik:400,400i,500,500i,700,700i,900|Russo+One|Ubuntu:400,400i,500,500i,700,700i|Yeseva+One&amp;subset=cyrillic-ext" rel="stylesheet">    <link rel="stylesheet" href="https://rawgit.com/MasterMaps/d3-slider/master/d3.slider.css">
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i|Cormorant+SC:300,400,500,600,700|Ledger|PT+Sans+Caption:400,700|PT+Sans:400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Sawarabi+Gothic&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 
 
@@ -38,37 +39,73 @@
     </div>
 
     <div id="sidebar">
-    <form action="" name='myForm'>
-    <input type="radio" value='' id='total' name='check' checked>
-    <label class="radioLabels" style="color:grey" for="total">Усі</label>
-    <br>
-    <input type="radio" value='Волинь' id='volun' name='check'>
-    <label class="radioLabels" style="color:brown" for="volun">Волинь</label>
-    <br>
-    <input type="radio" value='Галичина' id='galych' name='check'>
-    <label class="radioLabels" style="color:green" for="galych">Галичина</label>
-    <br>
-    <input type="radio" value='Донбас' id='donbas' name='check'>
-    <label class="radioLabels" style="color:orange" for="donbas">Донбас</label>
-    <br>
-    <input type="radio" value='Закарпаття' id='zakarp' name='check'>
-    <label class="radioLabels" style="color:rgb(227, 119, 194)" for="zakarp">Закарпаття</label>
-    <br>
-    <input type="radio" value='Південний-Схід' id='southerneast' name='check'>
-    <label class="radioLabels" style="color:purple" for="southerneast">Південний-Схід</label>
-    <br>
-    <input type="radio" value='Північний-Схід' id='northeneast' name='check'>
-    <label class="radioLabels" style="color:red"  for="northeneast">Північний-Схід</label>
-    <br>
-    <input type="radio" value='Серединний пояс' id='middle' name='check'>
-    <label class="radioLabels" style="color:rgb(31, 119, 180)" for="middle">Серединний пояс</label>
+    <form action="" id="fucktrying" name='myForm'>
+        <label class="rad radioLabels">
+            <input type="radio" value='Волинь' id='volun' name='check'>
+            <i style="background: rgb(140, 86, 75); border-color:rgb(140, 86, 75);"></i> Волинь
+        </label>
+        <br>
+        <br>
+    <!--<label class="radioLabels" style="color:brown" for="volun">Волинь</label>-->
 
+        <label class="rad radioLabels">
+            <input type="radio" value='Галичина' id='galych' name='check'>
+            <i style="background: green; border-color:green;"></i> Галичина
+    <!--<label class="radioLabels" style="color:green" for="galych">Галичина</label>-->
+        </label>
+        <br>
+        <br>
+
+        <label class="rad radioLabels">
+            <input type="radio" value='Донбас' id='donbas' name='check'>
+            <i style="background: orange; border-color:orange;"></i> Донбас
+    <!--<label class="radioLabels" style="color:orange" for="donbas">Донбас</label>-->
+        </label>
+        <br>
+        <br>
+
+        <label class="rad radioLabels">
+            <input type="radio" value='Закарпаття' id='zakarp' name='check'>
+            <i style="background: rgb(227, 119, 194); border-color:rgb(227, 119, 194);"></i> Закарпаття
+    <!--<label class="radioLabels" style="color:rgb(227, 119, 194)" for="zakarp">Закарпаття</label>-->
+        </label>
+        <br>
+        <br>
+        <label class="rad radioLabels">
+        <input type="radio" value='Південний-Схід' id='southerneast' name='check'>
+            <i style="background: purple; border-color:purple;"></i> Південний-Схід
+        <!--<label class="radioLabels" style="color:purple" for="southerneast">Південний-Схід</label>-->
+        </label>
+        <br>
+        <br>
+        <label class="rad radioLabels">
+    <input type="radio" value='Північний-Схід' id='northeneast' name='check'>
+            <i style="background: red; border-color:red;"></i> Північний-Схід
+    <!--<label class="radioLabels" style="color:red"  for="northeneast">Північний-Схід</label>-->
+        </label>
+        <br>
+        <br>
+        <label class="rad radioLabels">
+    <input type="radio" value='Серединний пояс' id='middle' name='check'>
+            <i style="background: rgb(31, 119, 180); border-color: rgb(31, 119, 180);"></i> Серединний пояс
+    <!--<label class="radioLabels" style="color:rgb(31, 119, 180)" for="middle">Серединний пояс</label>-->
+        </label>
+        <br>
+        <br>
+        <!--</div>-->
+        <!--<div>-->
+        <label class="rad radioLabels">
+        <input type="radio" value='' id='total' name='check' checked>
+            <i style="background: grey; border-color: grey;"></i> Усі регіони
+    <!--<label class="radioLabels" style="color:grey" for="total">Усі регіони</label>-->
+        </label>
+            <!--</div>-->
     </form>
 
-
-    <input id="filter" type="text" class="form-control" placeholder="знайдіть свій район...">
+        <input id="filter" type="text" class="form-control" placeholder="знайдіть свій район...">
 
     </div>
+
 
 </div>
 
