@@ -11,24 +11,24 @@ var durationTime = 300;
 
 
 var margin = {top: 10, right: 10, bottom: 50, left: 50},
-    // dim = Math.min(parseInt(d3.select("#scatter").style("width")), parseInt(d3.select("#scatter").style("height"))),
-    // width = dim - margin.left - margin.right,
-    // height = dim - margin.top - margin.bottom;
+// dim = Math.min(parseInt(d3.select("#scatter").style("width")), parseInt(d3.select("#scatter").style("height"))),
+// width = dim - margin.left - margin.right,
+// height = dim - margin.top - margin.bottom;
     box = $('#chart')[0].getBoundingClientRect();
 
 var width, height;
 
 if (box.height < box.width){
-        width = box.height * 1.3,
+    width = box.height * 1.3,
         height = box.height;
 }
 if (box.height > box.width){
-        width = box.width,
+    width = box.width,
         height = box.width;
-     $('#chart').css("height", height);
+    $('#chart').css("height", height);
 }
 
-    
+
 $("#slider").css("width", width).css("margin-left", margin.left);
 var color = d3.scale.category10();
 
@@ -81,11 +81,11 @@ var tickLabel = $(".tickmarks")[0].getBoundingClientRect();
 tickLabel = tickLabel.width;
 var halfOfTickLabel = tickLabel/2;
 
-    $('#y2002').css("margin-left", function(){ return 0 });
-    $('#y2006').css("margin-left", function(){ return step  - halfOfTickLabel });
-    $('#y2007').css("margin-left", function(){ return step * 2 - halfOfTickLabel  });
-    $('#y2012').css("margin-left", function(){ return step * 3 - halfOfTickLabel });
-    $('#y2014').css("margin-left", function(){ return width - tickLabel; });
+$('#y2002').css("margin-left", function(){ return 0 });
+$('#y2006').css("margin-left", function(){ return step  - halfOfTickLabel });
+$('#y2007').css("margin-left", function(){ return step * 2 - halfOfTickLabel  });
+$('#y2012').css("margin-left", function(){ return step * 3 - halfOfTickLabel });
+$('#y2014').css("margin-left", function(){ return width - tickLabel; });
 
 
 
@@ -95,7 +95,8 @@ alertValue = function() {
         return obj.value === sliderValue;
     });
     var year = filteredArray[0].key;
-    drawChart(year);
+    var selectedRegion = document.querySelector('input[name="check"]:checked').value;
+    drawChartYear(year, selectedRegion);
 };
 
 
@@ -129,7 +130,7 @@ d3.csv("data/dataset.csv", function(error, data) {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis)
-        
+
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
@@ -155,8 +156,8 @@ d3.csv("data/dataset.csv", function(error, data) {
 function resize() {
 
     // var dim = Math.min(parseInt(d3.select("#scatter").style("width")), parseInt(d3.select("#scatter").style("height"))),
-        // width = dim * 1.5 - margin.left - margin.right,
-        // height = dim - margin.top - margin.bottom;
+    // width = dim * 1.5 - margin.left - margin.right,
+    // height = dim - margin.top - margin.bottom;
     var box = $('#chart')[0].getBoundingClientRect();
     var width, height;
 
@@ -173,6 +174,19 @@ function resize() {
     x.range([0, width]);
     y.range([height, 0]);
 
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .innerTickSize(-height)
+        .outerTickSize(-height);
+
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .innerTickSize(-width)
+        .outerTickSize(-width);
+
     // Update the axis and text with the new scale
     svg.select('.x.axis')
         .attr("transform", "translate(0," + height + ")")
@@ -185,8 +199,8 @@ function resize() {
         .call(yAxis);
 
     // Update the tick marks
-    xAxis.ticks(width / 75);
-    yAxis.ticks(height / 75);
+    // xAxis.ticks(width / 75);
+    // yAxis.ticks(height / 75);
 
 
     svg.selectAll('.dot')
@@ -211,21 +225,36 @@ d3.select(window).on('resize', resize);
 
 // resize();
 
-function drawChart(year, region) {
+function drawChartYear(year, region) {
 
-    var x = d3.scale.linear()
-        .range([0, width]);
+
+    x.range([0, width]);
+    y.range([height, 0]);
+
+    svg.select('.x.axis')
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+
+    svg.select('.y.axis')
+
+        .call(yAxis);
 
     d3.csv("data/dataset.csv", function(error, data) {
         if (error) throw error;
 
-        var subset = data.filter(function(el){ return  el.year === year });
-
+        var subset;
         if(region) {
-            subset = subset
-                .filter(function(el){
-                    return  el.region === region });
+            subset = data.filter(function (el) {
+                return el.year === year && el.region === region
+            });
         }
+        else {
+            subset = data.filter(function (el) {
+                return el.year === year
+            });
+        }
+
 
         subset.forEach(function(d) {
             d.dem = +d.dem;
@@ -237,25 +266,107 @@ function drawChart(year, region) {
         var g = mysvg.select('g').transition();
 
 
-        // var newData = chart_data.filter(function(t) {
-        //     return t.year === year;
-        // });
+        x.domain([0, 1]);
+        y.domain([0, 1]);
+
+           d3.selectAll("circle")
+                .data(subset)
+                .transition()
+                .duration(750)
+                .attr("cx", function (d) {
+                    return x(d.dem);
+                })
+                .attr("cy", function (d) {
+                    return y(d.prorus);
+                })
+                .style("fill", function (d) {
+                    return color(d.region);
+                })
+                .style("opacity", "1");
+
+
+
+    });
+
+}
+
+function drawChartRegion(year, region) {
+
+
+    x.range([0, width]);
+    y.range([height, 0]);
+
+    svg.select('.x.axis')
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+
+    svg.select('.y.axis')
+        .call(yAxis);
+
+    d3.csv("data/dataset.csv", function(error, data) {
+        if (error) throw error;
+
+        var subset;
+        if(region) {
+            subset = data.filter(function (el) {
+                return el.year === year && el.region === region
+            });
+        }
+        else {
+            subset = data.filter(function (el) {
+                return el.year === year
+            });
+        }
+
+
+        subset.forEach(function(d) {
+            d.dem = +d.dem;
+            d.prorus = +d.prorus;
+        });
+
+
+        var mysvg = d3.select("#scatter").transition();
+        var g = mysvg.select('g').transition();
+
 
         x.domain([0, 1]);
         y.domain([0, 1]);
 
+        d3.selectAll(".dot").style("opacity", function() {
 
-
-        // svg.selectAll(".dot").remove();
+            if(region) {
+                return 0;
+            }
+        });
 
         d3.selectAll("circle")
             .data(subset)
-            .transition()
-            .duration(750)
-            .attr("cx", function(d) { return x(d.dem); })
-            .attr("cy", function(d) { return y(d.prorus); })
+            // .transition()
+            // .duration(750)
+            .attr("cx", function (d) {
+                return x(d.dem);
+            })
+            .attr("cy", function (d) {
+                return y(d.prorus);
+            })
+            .style("fill", function (d) {
+                return color(d.region);
+            })
+            .style("opacity", "1");
+
 
 
     });
-    
+
 }
+
+d3.selectAll("input[name='check']").on("change", function(){
+    var sliderValue = $("#mySlider").val();
+    var filteredArray = fullNames.filter(function (obj) {
+        return obj.value === sliderValue;
+    });
+    var year = filteredArray[0].key;
+    var selectedRegion = document.querySelector('input[name="check"]:checked').value;
+    drawChartRegion(year, selectedRegion)
+});
