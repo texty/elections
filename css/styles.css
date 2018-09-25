@@ -66,8 +66,8 @@ body {
   -webkit-margin-after: 0; }
 
 path {
-  stroke: grey;
-  stroke-width: 2;
+  stroke: #adadad;
+  stroke-width: 2px;
   fill: none; }
 
 .radioLabels {
