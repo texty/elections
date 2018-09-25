@@ -65,6 +65,9 @@
 
     </form>
 
+
+    <input id="filter" type="text" class="form-control" placeholder="пошук за районом...">
+
     </div>
 
 </div>
@@ -80,7 +83,7 @@
             if (err) throw err;
 
             data.forEach(function (d) {
-                d.dem = +d.date;
+                d.dem = +d.dem;
                 d.prorus = +d.prorus;
             });
 

@@ -65,8 +65,16 @@ body {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0; }
 
+path {
+  stroke: grey;
+  stroke-width: 2;
+  fill: none; }
+
 .radioLabels {
   text-transform: uppercase;
   font-weight: 800; }
+
+#filter {
+  margin-top: 100px; }
 
 /*# sourceMappingURL=styles.css.map */
