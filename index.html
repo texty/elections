@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Електоральні вподобання</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://rawgit.com/MasterMaps/d3-slider/master/d3.slider.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+
+</head>
+
+
+<body>
+
+<div id="viz">
+    <div id="chart">
+        <svg id="scatter"></svg>
+    </div>
+
+    <div id="slider">
+        <input id="mySlider" type="range" min="0" max="40" step="10" list="ticks" value="0"
+               onchange=alertValue();>
+        <datalist id="ticks">
+            <option>0</option>
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+            <option>40</option>
+        </datalist>
+        <div id="tickmarks">
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    var my_data;
+
+    function retrieve_my_data(cb) {
+        if (my_data) return cb(my_data);
+
+        return d3.csv("data/dataset.csv", function (err, data) {
+            if (err) throw err;
+
+            data.forEach(function (d) {
+                d.dem = +d.date;
+                d.prorus = +d.prorus;
+            });
+
+            my_data = data;
+            if (cb) return cb(data);
+            return;
+        })
+    }
+</script>
+
+
+
+
+<!-- Libraries -->
+<script src="lib/jquery-2.1.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<!--<script src="https://rawgit.com/MasterMaps/d3-slider/master/d3.slider.js"></script>-->
+<script src="lib/d3.tip.v0.6.3.js"></script>
+<script src="js/scatterplot.js"></script>
+<script src="lib/share-behavior.js"></script>
+
+
+
+
+<!--<div class="read-more" style="margin:50px 0 100px 0;">-->
+    <!--<h3 class="read-text"><b>Читайте також:</b></h3>-->
+    <!--<div class="read-more-third">-->
+        <!--<a target="_blank" href="http://texty.org.ua/pg/article/editorial/read/82121/Zombiakademija_vchenipensionery_NAN_Ukrajiny_ne_vytrymujut_konkurenciji"><img style="width:90%;"-->
+                                                                         <!--src="img/zombi.png"-->
+                                                                         <!--class="img-responsive" alt="Зомбі-академія"></a>-->
+    <!--</div>-->
+    <!--<div class="read-more-second">-->
+        <!--<a target="_blank" href="http://texty.org.ua/pg/article/Oximets/read/83231/Jera_dynozavriv_Popry_kolyshni_dosagnenna_Instytut_kibernetyky?a_srt=1"><img style="width:90%;" src="img/kibernetika.png"-->
+                                                                        <!--class="img-responsive"-->
+                                                                        <!--alt="Ера динозаврів"></a>-->
+    <!--</div>-->
+    <!--<div class="read-more-first">-->
+        <!--<a target="_blank" href="http://texty.org.ua/pg/article/editorial/read/84562/Jak_SShA_ta_Polshha_pidtrymujut_jakisnu_nauku"><img style="width:90%;"-->
+                                                                             <!--src="img/foreign.png"-->
+                                                                             <!--class="img-responsive"-->
+                                                                             <!--alt="Досвід США Польщі"></a>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<!-- Footer-->
+
+
+<!--<div class="footer">-->
+    <!--<ul class="links0">-->
+        <!--<li id="big">&copy; 2018, Тексти.org.ua <br/>Медія для розумних</li>-->
+
+    <!--</ul>-->
+
+
+    <!--<ul class="links1">-->
+        <!--<li><a href="http://texty.org.ua/mod/article/index.php?ed=1">Вибір редакції</a>-->
+            <!--<a href="http://texty.org.ua/mod/article/?view=rss&amp;ed=1">(RSS)</a>-->
+        <!--</li>-->
+        <!--<li><a href="http://texty.org.ua/mod/video/">Відео</a>-->
+            <!--<a href="http://texty.org.ua/mod/video/?view=rss">(RSS)</a>-->
+        <!--</li>-->
+        <!--<li><a href="http://texty.org.ua/mod/article/">Статті</a>-->
+            <!--<a href="http://texty.org.ua/mod/article/?view=rss">(RSS)</a>-->
+        <!--</li>-->
+        <!--<li><a href="http://texty.org.ua/mod/news/">Новини</a>-->
+            <!--<a href="http://texty.org.ua/mod/news/?view=rss">(RSS)</a>-->
+        <!--</li>-->
+        <!--<li><a href="http://texty.org.ua/mod/blog/everyone.php">Блоги</a>-->
+            <!--<a href="http://texty.org.ua/mod/blog/blog_list.php?view=rss">(RSS)</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+
+    <!--<ul class="links2">-->
+        <!--<li>-->
+            <!--<a href="http://texty.org.ua/mod/archive/tag.php?tag=%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D1%96%D1%8F">Концепції</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a href="http://texty.org.ua/mod/archive/tag.php?tag=%D1%80%D0%B5%D1%84%D0%BE%D1%80%D0%BC%D0%B8">Реформи</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a href="http://texty.org.ua/mod/archive/tag.php?tag=%D0%B4%D0%BE%D1%81%D0%B2%D1%96%D0%B4">Важливий-->
+                <!--досвід</a></li>-->
+        <!--<li>-->
+            <!--<a href="http://texty.org.ua/mod/archive/tag.php?tag=%D1%96%D0%BD%D0%BE%D0%B7%D0%BC%D1%96">Найцікавіше-->
+                <!--з інозмі</a></li>-->
+        <!--<li><a href="http://texty.org.ua/pg/blog/infoviz">Журналістика даних</a></li>-->
+    <!--</ul>-->
+
+
+    <!--<ul class="links3">-->
+        <!--<li><a id="orange" href="http://texty.org.ua/mod/pages/donate.php" class="support-site">Підтримай сайт-->
+            <!--фінансово!</a></li>-->
+        <!--<li><a href="http://facebook.com/texty.org.ua">Ми у Фейсбуці</a></li>-->
+        <!--<li><a href="http://twitter.com/textyorgua">Ми у Твітері</a></li>-->
+        <!--<li><a href="http://texty.org.ua/pg/pages/view/22">Про нас</a></li>-->
+        <!--<li><a href="http://texty.org.ua/mod/archive/">Архів</a></li>-->
+    <!--</ul>-->
+
+    <!--<div class="copying-info">-->
+        <!--Матеріали ТЕКСТИ.org.ua можна поширювати згідно з ліцензією Creative Commons з обов’язковим-->
+        <!--посиланням. Велике прохання ставити гіперпосилання в першому чи другому абзаці вашого матеріалу.-->
+    <!--</div>-->
+<!--</div>-->
+
+
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-18136548-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+</body>
+</html>
+
