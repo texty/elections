@@ -401,6 +401,38 @@ d3.selectAll("input[name='check']").on("change", function(){
 
 });
 
+$("#animation").on("click", function() {
+    var selectedRegion = document.querySelector('input[name="check"]:checked').value;
+    document.querySelector('input#mySlider').value = 0;
+    $('#bigYearLabel').html("2002");
+    drawChartYear("2002", selectedRegion);
+
+    setTimeout(function(){
+        document.querySelector('input#mySlider').value = 10;
+        $('#bigYearLabel').html("2006");
+        drawChartYear("2006", selectedRegion);
+
+    }, 1000);
+    
+    setTimeout(function(){
+        document.querySelector('input#mySlider').value = 20;
+        $('#bigYearLabel').html("2007");
+        drawChartYear("2007", selectedRegion);
+    }, 2000);
+    
+    setTimeout(function(){
+        document.querySelector('input#mySlider').value = 30;
+        $('#bigYearLabel').html("2012");
+        drawChartYear("2012", selectedRegion);
+    }, 3000);
+    
+    setTimeout(function(){
+        document.querySelector('input#mySlider').value = 40;
+        $('#bigYearLabel').html("2014");
+        drawChartYear("2014", selectedRegion);
+    }, 4000);
+});
+
 
 
 function wrap(text, width) {

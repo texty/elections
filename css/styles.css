@@ -50,6 +50,7 @@ body {
       margin-top: 100px; } }
 
 #slider {
+  position: relative;
   grid-column: 2/3;
   grid-row: 2/3; }
   @media (max-width: 820px) and (orientation: portrait) {
@@ -67,6 +68,12 @@ body {
       margin-left: calc(10vw + 50px) !important;
       grid-row: 3/4;
       grid-column: 1/-1; } }
+
+#animation {
+  width: 30px;
+  position: absolute;
+  left: -50px;
+  top: 5px; }
 
 #chart {
   grid-column: 2/3;
