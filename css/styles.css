@@ -10,42 +10,77 @@ body {
   shape-rendering: crispEdges; }
 
 #viz {
-  margin-left: 10vw;
-  margin-right: 10vw;
+  height: 100vh;
+  overflow-y: hidden;
   display: grid;
-  grid-template-columns: 60vw 3vw 25vw;
+  width: 100vw;
+  grid-template-columns: 5vw 60vw 3vw 25vw 5vw;
   grid-template-rows: 80vh 10vh; }
   @media (max-width: 820px) and (orientation: portrait) {
     #viz {
       grid-template-columns: 100vw;
-      grid-template-rows: 40vh 40vh 10vh; } }
+      grid-template-rows: 30vh 50vh 10vh; } }
+  @media (min-width: 2000px) {
+    #viz {
+      grid-template-columns: 10vw 50vw 5vw 20vw 10vw; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    #viz {
+      grid-template-columns: 100vw;
+      grid-template-rows: 30vh 50vh 10vh; } }
 
 #sidebar {
   padding-top: 5px;
-  grid-column: 3/4;
+  grid-column: 4/5;
   grid-row: 1/2; }
   @media (max-width: 820px) and (orientation: portrait) {
     #sidebar {
-      grid-column: 1/2; } }
+      grid-column: 1/2;
+      width: 80vw;
+      margin-left: calc(10vw - 10px) !important;
+      margin-top: 20px; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    #sidebar {
+      grid-column: 1/2;
+      width: 80vw;
+      margin-left: calc(10vw + 50px);
+      margin-top: 100px; } }
 
 #slider {
-  grid-row: 2/3;
-  margin-top: 50px; }
+  grid-column: 2/3;
+  grid-row: 2/3; }
   @media (max-width: 820px) and (orientation: portrait) {
     #slider {
-      grid-row: 3/4; } }
+      width: 80vw;
+      margin-left: calc(10vw - 10px) !important;
+      grid-row: 3/4;
+      grid-column: 1/2; } }
   @media (max-width: 820px) and (orientation: landscape) {
     #slider {
       margin-top: 10px; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    #slider {
+      width: 80vw;
+      margin-left: calc(10vw + 50px) !important;
+      grid-row: 3/4;
+      grid-column: 1/-1; } }
 
 #chart {
-  grid-column: 1/2;
+  grid-column: 2/3;
   grid-row: 1/2;
   width: 100%;
   max-height: calc(100% - 50px); }
   @media (max-width: 820px) and (orientation: portrait) {
     #chart {
-      grid-row: 2/3; } }
+      width: 80vw;
+      margin-left: calc(10vw - 10px) !important;
+      grid-row: 2/3;
+      grid-column: 1/-1; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    #chart {
+      width: 80%;
+      margin-left: 10%;
+      grid-row: 2/3;
+      grid-column: 1/-1; } }
 
 .d3-tip {
   line-height: 1;
@@ -93,25 +128,49 @@ path {
   font-weight: 400;
   font-size: 14px;
   color: grey; }
+  @media (min-width: 2000px) {
+    .radioLabels {
+      font-size: 25px; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    .radioLabels {
+      font-size: 20px; } }
 
 #filter {
   margin-top: 50px; }
-  @media (max-width: 820px) and (orientation: landscape) {
+  @media (max-width: 820px) {
     #filter {
-      margin-top: 10px; } }
+      margin-top: 20px;
+      margin-bottom: 20px; } }
+  @media (min-width: 2000px) {
+    #filter {
+      font-size: 25px;
+      margin-top: 50px; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+    #filter {
+      margin-top: 50px;
+      font-size: 20px; } }
 
 #hint1 {
   font-size: 12px;
   font-weight: 400;
   fill: #4d4d4d; }
+  @media (max-width: 820px) and (orientation: portrait) {
+    #hint1 {
+      display: none; } }
 
 #bigYearLabel {
   font-size: 65px;
   font-weight: 800;
   fill: #adadad; }
-  @media (max-width: 820px) {
+  @media (max-width: 500px) {
     #bigYearLabel {
-      font-size: 30px; } }
+      font-size: 35px; } }
+  @media (min-width: 501px) and (max-width: 820px) {
+    #bigYearLabel {
+      font-size: 50px; } }
+  @media (min-width: 2000px) {
+    #bigYearLabel {
+      font-size: 90px; } }
 
 input[type="radio"] {
   margin: 10px 3px 0 0; }
@@ -121,6 +180,10 @@ input[type="radio"] {
   display: grid;
   grid-template-columns: 100%; }
   @media (max-width: 820px) and (orientation: portrait) {
+    #fucktrying {
+      display: grid;
+      grid-template-columns: 50% 50%; } }
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
     #fucktrying {
       display: grid;
       grid-template-columns: 50% 50%; } }
@@ -134,6 +197,9 @@ text.label {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   margin: 10px 3px 0 0; }
+  @media (min-width: 2000px) {
+    .rad {
+      margin: 20px 3px 0 0; } }
 
 .rad > input {
   visibility: hidden;

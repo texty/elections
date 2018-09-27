@@ -13,23 +13,10 @@ if(window.innerWidth < 825){
 else {
     margin = {top: 10, right: 10, bottom: 50, left: 50};
 }
-    var box = $('#chart')[0].getBoundingClientRect();
-// dim = Math.min(parseInt(d3.select("#scatter").style("width")), parseInt(d3.select("#scatter").style("height"))),
-// width = dim - margin.left - margin.right,
-// height = dim - margin.top - margin.bottom;
-
-var width, height;
-
-if (box.height < box.width){
-    width = box.height * 1.3;
-    height = box.height;
-}
-if (box.height > box.width){
-    width = box.width;
-    height = box.width;
-    $('#chart').css("height", height);
-}
-
+var box = $('#chart')[0].getBoundingClientRect();
+var dim = Math.min(parseInt(d3.select("#chart").style("width")), parseInt(d3.select("#chart").style("height")));
+var height = box.height - margin.top - margin.bottom;
+var width = box.width - margin.left - margin.right;
 
 $("#slider").css("width", width).css("margin-left", margin.left);
 
@@ -330,16 +317,8 @@ function drawChartYear(year, region) {
 
 function resize() {
     var box = $('#chart')[0].getBoundingClientRect();
-    var width, height;
-
-    if (box.height < box.width){
-        width = box.height;
-        height = box.height;
-    }
-    if (box.height > box.width){
-        width = box.width;
-        height = box.width;
-    }
+    var height = box.height - margin.top - margin.bottom;
+    var width = box.width - margin.left - margin.right;
 
     x.range([0, width]);
     y.range([height, 0]);
@@ -375,6 +354,18 @@ function resize() {
         .attr("cx", function(d) { return x(d.prorus); })
         .attr("cy", function(d) { return y(d.dem); });
 
+    svg.selectAll("#hint1")
+        .attr("x", x(0.4))
+        .attr("y", y(0.45))
+        .attr("dy", 0)
+        .call(wrap, 150);
+
+    svg.selectAll("#bigYearLabel")
+        .attr("x", x(0.7))
+        .attr("y", y(0.8))
+        .attr("dy", 0);
+
+
 
     //resize slider
     $("#mySlider").css("width", width);
@@ -391,6 +382,8 @@ function resize() {
 } //end of resize function
 
 d3.select(window).on('resize', resize);
+d3.select(window).on('orientationchange', resize);
+
 
 //перемальовуємо графік після вибору регіону
 d3.selectAll("input[name='check']").on("change", function(){
