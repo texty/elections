@@ -147,7 +147,8 @@ path {
       font-size: 20px; } }
 
 #filter {
-  margin-top: 50px; }
+  margin-top: 50px;
+  margin-left: 5%; }
   @media (max-width: 820px) {
     #filter {
       margin-top: 20px;
