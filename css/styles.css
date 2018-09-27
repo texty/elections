@@ -16,6 +16,10 @@ body {
   width: 100vw;
   grid-template-columns: 5vw 60vw 3vw 25vw 5vw;
   grid-template-rows: 80vh 10vh; }
+  @media (max-device-width: 568px) and (min-device-width: 320px) {
+    #viz {
+      grid-template-columns: 100vw !important;
+      grid-template-rows: 35vh 50vh 8vh !important; } }
   @media (max-width: 820px) and (orientation: portrait) {
     #viz {
       grid-template-columns: 100vw;
@@ -162,12 +166,12 @@ path {
   font-size: 65px;
   font-weight: 800;
   fill: #adadad; }
-  @media (max-width: 500px) {
+  @media (max-device-width: 568px) and (min-device-width: 320px) {
     #bigYearLabel {
-      font-size: 35px; } }
-  @media (min-width: 501px) and (max-width: 820px) {
+      font-size: 30px !important; } }
+  @media (max-width: 820px) {
     #bigYearLabel {
-      font-size: 50px; } }
+      font-size: 40px; } }
   @media (min-width: 2000px) {
     #bigYearLabel {
       font-size: 90px; } }

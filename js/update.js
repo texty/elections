@@ -354,11 +354,13 @@ function resize() {
         .attr("cx", function(d) { return x(d.prorus); })
         .attr("cy", function(d) { return y(d.dem); });
 
-    svg.selectAll("#hint1")
-        .attr("x", x(0.4))
-        .attr("y", y(0.45))
-        .attr("dy", 0)
-        .call(wrap, 150);
+    if(window.innerWidth < 825) {
+        svg.selectAll("#hint1")
+            .attr("x", x(0.4))
+            .attr("y", y(0.45))
+            .attr("dy", 0)
+            .call(wrap, 150);
+    }
 
     svg.selectAll("#bigYearLabel")
         .attr("x", x(0.7))
