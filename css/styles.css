@@ -70,6 +70,7 @@ body {
       grid-column: 1/-1; } }
 
 #animation {
+  cursor: pointer;
   width: 30px;
   position: absolute;
   left: -50px;
@@ -186,6 +187,9 @@ path {
 
 input[type="radio"] {
   margin: 10px 3px 0 0; }
+
+input[type="range"] {
+  cursor: pointer; }
 
 #regions {
   margin-left: 5%;

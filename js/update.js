@@ -398,39 +398,27 @@ d3.selectAll("input[name='check']").on("change", function(){
 
     var selectedRegion = document.querySelector('input[name="check"]:checked').value;
     drawChartYear(year, selectedRegion);
-
 });
 
-$("#animation").on("click", function() {
+//програти графік
+function animateYear(value){
+    document.querySelector('input#mySlider').value = value;
     var selectedRegion = document.querySelector('input[name="check"]:checked').value;
-    document.querySelector('input#mySlider').value = 0;
-    $('#bigYearLabel').html("2002");
-    drawChartYear("2002", selectedRegion);
+    var sliderValue = $("#mySlider").val();
+    var filteredArray = sliderYears.filter(function (obj) {
+        return obj.value === sliderValue;  });
+    var year = filteredArray[0].key;
+    $('#bigYearLabel').html(year);
+    drawChartYear(year, selectedRegion);
+}
 
-    setTimeout(function(){
-        document.querySelector('input#mySlider').value = 10;
-        $('#bigYearLabel').html("2006");
-        drawChartYear("2006", selectedRegion);
+$("#animation").on("click", function() {
+    animateYear(0);
+    setTimeout(function(){ animateYear(10)}, 1000);
+    setTimeout(function(){ animateYear(20)}, 2000);
+    setTimeout(function(){ animateYear(30)}, 3000);
+    setTimeout(function(){ animateYear(40)}, 4000);
 
-    }, 1000);
-    
-    setTimeout(function(){
-        document.querySelector('input#mySlider').value = 20;
-        $('#bigYearLabel').html("2007");
-        drawChartYear("2007", selectedRegion);
-    }, 2000);
-    
-    setTimeout(function(){
-        document.querySelector('input#mySlider').value = 30;
-        $('#bigYearLabel').html("2012");
-        drawChartYear("2012", selectedRegion);
-    }, 3000);
-    
-    setTimeout(function(){
-        document.querySelector('input#mySlider').value = 40;
-        $('#bigYearLabel').html("2014");
-        drawChartYear("2014", selectedRegion);
-    }, 4000);
 });
 
 
